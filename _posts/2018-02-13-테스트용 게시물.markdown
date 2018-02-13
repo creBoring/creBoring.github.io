@@ -1,0 +1,24 @@
+---
+layout: post
+title: 테스트용 게시물
+date: 2018-02-13 13:59:20 +0300
+description: You’ll find this post in your `_posts` directory. Go ahead and edit it and re-build the site to see your changes. # Add post description (optional)
+img: i-rest.jpg # Add image post (optional)
+tags: [test, AWS]
+---
+테스트용 게시물입니다.<br>
+무시하셔도 상관없습니다.
+by 이도훈
+
+## 가나다라
+
+마크다운으로 작성됩니다.
+
+* 맛있는 치킨
+* 그냥 치킨
+* 맛없는 치킨
+* 비싼 치킨
+
+게시글 테스트<br>
+하나둘셋<br><hr>
+하나둘셋
