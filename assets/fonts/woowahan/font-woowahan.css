@@ -4,3 +4,10 @@
   font-weight: normal;
   font-style: normal;
 }
+
+@font-face {
+  font-family: 'FontWoowahanContent';
+  src: url('./BMJUA_ttf.ttf');
+  font-weight: normal;
+  font-style: normal;
+}
