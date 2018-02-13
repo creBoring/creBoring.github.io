@@ -9,7 +9,7 @@ site-twitter: #if your site has a twitter account, enter it here
 # Author Settings
 author: Dohun Lee # add your name
 author-img: siba.jpg # add your photo
-about-author: I'm not a dog. :D # add description
+about-author: I'm not a dog :D<br>This page covers development techniques<br>Theme by flexible-jekyll # add description
 social-twitter: # add your Twitter handle
 social-facebook: dohoon.lee.739 # add your Facebook handle
 social-github: creBoring # add your Github handle
