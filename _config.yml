@@ -9,7 +9,7 @@ site-twitter: #if your site has a twitter account, enter it here
 # Author Settings
 author: creator boring # add your name
 author-img: siba.jpg # add your photo
-about-author: 전 개가 아닙니다 :D<br><br>기술 블로그<br>Theme by <b>flexible-jekyll</b> # add description
+about-author: 전 개가 아닙니다 :D<br><br>기술 블로그<br>Theme by <b>flexible-jekyll</b><br>Font by <b>woowahan</b> # add description
 social-twitter: # add your Twitter handle
 social-facebook: dohoon.lee.739 # add your Facebook handle
 social-github: creBoring # add your Github handle
