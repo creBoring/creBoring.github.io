@@ -7,7 +7,7 @@ img: i-rest.jpg # Add image post (optional)
 tags: [test, AWS]
 ---
 테스트용 게시물입니다.<br>
-무시하셔도 상관없습니다.
+무시하셔도 상관없습니다.<br>
 by 이도훈
 
 ## 가나다라
@@ -20,5 +20,8 @@ by 이도훈
 * 비싼 치킨
 
 게시글 테스트<br>
-하나둘셋<br><hr>
+하나둘셋<br>
+
+---
+
 하나둘셋
