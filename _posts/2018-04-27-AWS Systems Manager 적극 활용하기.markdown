@@ -1,9 +1,9 @@
 ---
 layout: post
-title: AWS System Manager 적극 활용하기
+title: AWS Systems Manager 적극 활용하기
 date: 2018-04-27 15:00:00 +0300
-description: AWS System Manager에 대해서와 사용법, 활용법에 대해 정리한 글이다. # Add post description (optional)
-img: AWS-systems-manager.png # Add image post (optional)
+description: AWS Systems Manager에 대해서와 사용법, 활용법에 대해 정리한 글이다. # Add post description (optional)
+img: AWS-system-manager.png # Add image post (optional)
 tags: [AWS, Systems Manager, 사용법]
 ---
 
