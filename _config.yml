@@ -32,3 +32,7 @@ paginate: 8
 paginate_path: "/page/:num"
 
 exclude: ["node_modules", "gulpfile.js", "package.json", "yarn.lock"]
+
+# kramdown tagging
+kramdown:
+  auto_ids: true # Auto-generate ID's for headings
