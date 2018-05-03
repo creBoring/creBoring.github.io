@@ -48,14 +48,27 @@ AWS Systems Manager의 기능은 아래의 대표적인 4가지 기능이 존재
 
 <img src='/assets/img/2018-04-27/tags.png'>
 
-실제로 리소스 그룹은 **리소스 유형**과 **태그 값**을 이용한 **쿼리문**으로 생성되며,<br>
-직접 리소스들을 수동적으로 추가하는 것이 아닌, 위에서 설정한 쿼리문에 적합한 리소스들을 대상으로 여러가지 작업을 진행할 수 있습니다.<br>
+실제로 리소스 그룹은 **리소스 유형**과 **태그 값**을 이용한 **쿼리문**으로 생성되는 집합으로,<br>
+직접 리소스들을 수동적으로 추가하는 것이 아닌, 위에서 설정한 쿼리문에 부합한 리소스들을 대상으로 여러가지 작업을 진행할 수 있습니다.<br>
 즉, 리소스 그룹은 **정적이지 않으며 동적으로 변경됩니다**.
 (예: 리소스 그룹에 포함되어 있던 인스턴스 하나가 삭제되면 자동으로 리소스 그룹에서도 제거되고, 리소스 그룹 쿼리에 적합한 인스턴스가 새로 생성되면 자동으로 리소스 그룹에 추가 됩니다.)
 
 ### 인사이트(Insight)
 
+인사이트는 AWS 리소스들을 대상으로 한 여러 데이터들을 한 곳에 모아 보여주는 서비스입니다. <br>
+CloudWatch와 같이 몇몇 서비스들은 각각의 고유한 서비스이지만 인사이트 탭에서도 바로 확인할 수 있습니다.
 
+인사이트의 주요 기능은 **인벤토리**와 **규정 준수**인데, 이는 리소스들에 **에이전트(Agent)**를 심고 이를 이용해 전달받은 데이터를 기반으로 작동합니다.
+
+**인벤토리**의 경우 더 정확하게 말하면 **인벤토리 수집** 기능으로, 인벤토리란 수집할 메타데이터들의 틀, 구성이라고 생각하면 됩니다.
+
+<img src='/assets/img/2018-04-27/inventory.png'>
+
+예를들면 네트워크 구성(IP, MacAddr, DNS, ...), Windows 업데이트(설치한 사람, 설치 날짜, ...), 애플리케이션(애플리케이션 이름, 버전, ...) 등과 같은 메타데이터 정보를 전달받을 인벤토리를 구성하고 인벤토리를 구성에 맞는 데이터를 수집합니다.
+
+**규정 준수**는 관리형 인스턴스 집합에 대해 패치 규정을 준수했는지 체크할 수 있으며, 구성의 일관성을 검사할 수 있습니다.<br>
+인스턴스 집합의 데이터들을 수집한 후 규정에 맞지 않은 특정 인스턴스로 **드릴 다운(Drill down)**할 수 있습니다.<br>
+기본적으로 구성 규정 준수는 *Systems Manager Patch Manager* 와 *Systems Manager State Manager* 에 대한 규정 준수 데이터를 표시하는데, Patch Manager를 통해 패치 규정을 준수했는지 체크할 수 있으며, State Manager를 통해 리소스의 연결 규정을 준수 했는지 검사합니다.
 
 ### Actions
 
@@ -72,7 +85,20 @@ AWS Systems Manager의 기능은 아래의 대표적인 4가지 기능이 존재
 ## AWS Systems Manager 활용하기
 
 
+---
+
 ### 참고 문헌
 
 > AWS Docs<br>
 https://docs.aws.amazon.com/ko_kr/systems-manager/latest/userguide/what-is-systems-manager.html
+
+### 이미지 참고
+
+> AWS<br>
+https://aws.amazon.com/ko/systems-manager/
+
+> tag<br>
+https://tealium.com/what-is-tag-management/
+
+> inventory<br>
+https://www.ispsystem.com/software/dcimanager/features/extended-inventory-management
