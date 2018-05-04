@@ -64,13 +64,42 @@ CloudWatch와 같이 몇몇 서비스들은 각각의 고유한 서비스이지�
 
 <img src='/assets/img/2018-04-27/inventory.png'>
 
-예를들면 네트워크 구성(IP, MacAddr, DNS, ...), Windows 업데이트(설치한 사람, 설치 날짜, ...), 애플리케이션(애플리케이션 이름, 버전, ...) 등과 같은 메타데이터 정보를 전달받을 인벤토리를 구성하고 인벤토리를 구성에 맞는 데이터를 수집합니다.
+예를들면 네트워크 구성(IP, MacAddr, DNS, ...), Windows 업데이트(설치한 사람, 설치 날짜, ...), 애플리케이션(애플리케이션 이름, 버전, ...) 등과 같은 메타데이터 정보를 전달받을 인벤토리를 구성하고 구성에 맞는 데이터를 수집합니다.
 
-**규정 준수**는 관리형 인스턴스 집합에 대해 패치 규정을 준수했는지 체크할 수 있으며, 구성의 일관성을 검사할 수 있습니다.<br>
+**규정 준수**는 관리형 인스턴스 집합에 대해 패치 규정을 준수했는지 체크할 수 있으며, 구성의 일관성을 검사할 수 있습니다.
+
+ *관리형 인스턴스는 "**공유 리소스**" 단계에서 자세히 다룹니다.*
+
 인스턴스 집합의 데이터들을 수집한 후 규정에 맞지 않은 특정 인스턴스로 **드릴 다운(Drill down)**할 수 있습니다.<br>
 기본적으로 구성 규정 준수는 *Systems Manager Patch Manager* 와 *Systems Manager State Manager* 에 대한 규정 준수 데이터를 표시하는데, Patch Manager를 통해 패치 규정을 준수했는지 체크할 수 있으며, State Manager를 통해 리소스의 연결 규정을 준수 했는지 검사합니다.
 
 ### Actions
+
+Actions 에는 실제 AWS 리소스에 여러가지 할 수 있는 작업들을 제공합니다.
+(여러 실제 리소스에 작업을 하는 서비스들을 모아둔 탭입니다.)
+
+Actions 에는 아래와 같은 작업들이 존재합니다.
+
+- AWS Systems Manager 자동화
+- AWS Systems Manager Run Command
+- AWS Systems Manager Patch Manager
+- AWS Systems Manager Maintenance Windows
+- AWS Systems Manager State Manager
+
+실제 이 작업들은 위에서 다뤘던 **리소스 그룹**, **인사이트** 와 연계하여 효율적으로 작업할 수 있습니다.<br>
+(실제 Actions의 Patch Manager와 State Manager도 인사이트의 규정 준수에서 사용되었던 기능입니다)
+
+간략하게 하나씩 살펴보면 아래와 같습니다.
+
+**AWS Systems Manager 자동화** : 
+
+**AWS Systems Manager Run Command** :
+
+**AWS Systems Manager Patch Manager** :
+
+**AWS Systems Manager Maintenance Windows** :
+
+**AWS Systems Manager State Manager** :
 
 ### 공유 리소스(Shared Resource)
 
