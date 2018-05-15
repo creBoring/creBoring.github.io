@@ -91,11 +91,17 @@ Actions 에는 아래와 같은 작업들이 존재합니다.
 
 간략하게 하나씩 살펴보면 아래와 같습니다.
 
-**AWS Systems Manager 자동화** : 
+**AWS Systems Manager 자동화** : 일반적인 인스턴스나 시스템의 **유지 관리**와 **배포 작업**을 간소화하는 작업을 처리합니다. <br>
+대표적으로 EC2, RDS 인스턴스 재시작이나 AMI, Snapshot 생성 등을 처리할 수 있으며 특정 인스턴스가 아니라 위에서 다룬 '리소스 그룹'을 대상으로 여러 리소스들에 한 번에 작업을 요청할 수도 있습니다.
 
-**AWS Systems Manager Run Command** :
+**AWS Systems Manager Run Command** : 인스턴스 구성을 **원격**으로 관리하게 해주는 작업입니다.<br>
+AWS Systems Manager 자동화가 인스턴스나 시스템의 인프라 수준의 작업이였다면, Run Command는 인스턴스 내부의 **Command line 수준**의 작업을 행할 수 있습니다.<br>
+실제로 Run Command를 통해 Console 화면에서 Shell Script를 실행할 수도 있으며, 윈도우 업데이트, RunDockerAction 등 다양한 작업이 가능합니다.
 
-**AWS Systems Manager Patch Manager** :
+<img src="/assets/img/2018-04-27/run-command.png">
+(Run Command로 Sheel Script 실행하는 Console 화면의 일부분..)
+
+**AWS Systems Manager Patch Manager** : Patch Manager는 보안 관련 업데이트와 같은 패치를 관리형 인스턴스에 자동화 해줍니다. 위에서 다룬 인사이트의 규정 준수에서 사용된 Patch Manager가 바로 이 AWS Systems Manager Patch Manager 입니다.
 
 **AWS Systems Manager Maintenance Windows** :
 
