@@ -988,6 +988,7 @@ table tfoot td {
 }
 
 .content-box {
+  background-color: #F7F7F7;
   padding: 20px;
   padding-left: 260px;
   display: -webkit-box;

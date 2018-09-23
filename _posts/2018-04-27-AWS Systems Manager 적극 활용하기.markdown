@@ -2,7 +2,7 @@
 layout: post
 title: AWS Systems Manager 적극 활용하기
 date: 2018-04-27 15:00:00 +0300
-description: AWS Systems Manager에 대해서와 사용법, 활용법에 대해 정리한 글이다. # Add post description (optional)
+description: AWS Systems Manager의 구성, 사용법, 활용법에 대해 정리한 글이다. # Add post description (optional)
 img: 2018-04-27/AWS-system-manager.png # Add image post (optional)
 tags: [AWS, Systems Manager, 사용법]
 ---
@@ -70,7 +70,7 @@ CloudWatch와 같이 몇몇의 개별적인 AWS 서비스들 또한 인사이트
 인스턴스 집합의 데이터들을 수집한 후 규정에 맞지 않은 특정 인스턴스로 **드릴 다운(Drill down)**할 수 있습니다.<br>
 기본적으로 구성 규정 준수는 *Systems Manager Patch Manager* 와 *Systems Manager State Manager* 에 대한 규정 준수 데이터를 표시하는데, Patch Manager를 통해 패치 규정을 준수했는지 체크할 수 있으며, State Manager를 통해 리소스의 연결 규정을 준수 했는지 검사합니다.
 
-> *관리형 인스턴스는 "**공유 리소스**" 단계에서 자세히 다룹니다.*
+> *관리형 인스턴스는 "**공유 리소스**" 단계에서 더 자세히 다룹니다.*
 
 
 ### Actions
@@ -104,7 +104,11 @@ AWS Systems Manager 자동화가 인스턴스, 시스템과 같은 인프라 수
 
 **AWS Systems Manager Session Manager (NEW)** : -아직 업데이트되지 않았습니다-
 
-**AWS Systems Manager Patch Manager** : Patch Manager는 보안 관련 업데이트와 같은 패치를 관리형 인스턴스에 자동화 해줍니다. 위에서 다룬 인사이트의 규정 준수에서 사용된 Patch Manager가 바로 이 AWS Systems Manager Patch Manager 입니다.
+**AWS Systems Manager Patch Manager** : Patch Manager는 보안 관련 업데이트나 AWS OS 패치와 같은 패치들을 자동화 해줍니다. 위에서 다룬 인사이트의 규정 준수에서 사용된 Patch Manager가 바로 이 AWS Systems Manager Patch Manager 입니다.
+
+<img src='/assets/img/2018-04-27/update-image.jpg'>
+
+
 
 **AWS Systems Manager Maintenance Windows** :
 
