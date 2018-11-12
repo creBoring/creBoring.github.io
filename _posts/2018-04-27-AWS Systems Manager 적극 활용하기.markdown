@@ -24,7 +24,8 @@ tags: [AWS, Systems Manager, 사용법]
 
 ## AWS Systems Manager 란?
 
-AWS Systems Manager 란 AWS에서 여러 리소스들을 **중앙 집중화**하여 인프라 구성을 논리적으로 나누고 작업을 자동화할 수 있는 **관리형 서비스 모음**입니다.
+AWS Systems Manager 란 AWS에서 여러 리소스들을 **중앙 집중화**하여 인프라 구성을 논리적으로 나누고 작업을 자동화할 수 있는 **관리형 서비스**입니다.<br>
+다른 타 AWS 서비스들에 비해 실제 EC2, RDS 내부 리소스 영역까지 관리할 수 있는 몇 안되는 서비스 중 하나입니다.
 
 <img src='/assets/img/2018-04-27/AWS-system-manager-icon.png'>
 
@@ -99,20 +100,48 @@ Actions 에는 아래와 같은 작업들이 존재합니다.
 AWS Systems Manager 자동화가 인스턴스, 시스템과 같은 인프라 수준의 작업이였다면, Run Command는 인스턴스 내부의 **Command line 수준**의 작업을 행할 수 있습니다.<br>
 실제로 Run Command를 통해 Console 화면에서 Shell Script를 실행할 수도 있으며, 윈도우 업데이트, RunDockerAction 등 다양한 작업이 가능합니다.
 
-<img src="/assets/img/2018-04-27/run-command.png">
-(Run Command로 Sheel Script 실행하는 Console 화면의 일부분..)
+**AWS Systems Manager Session Manager (NEW)** : Session Manager는 최근에 업데이트 된 기능으로, EC2 인스턴스의 **Shell**에 접근할 수 있는 기능을 제공합니다.
+실제 공식문서에서 소개할 때도 **Bastion host 를 대체하는 기능**이라고 언급할 만큼 접근성이 용이하며, sudo 권한이 있어 admin 권한으로의 작업도 가능합니다.
+다만, 한가지 아쉬운 점은 Windows 서버에 접근할 때도 GUI가 아닌 Power Shell 로만 접근이 가능하기 때문에 완전히 Bastion Host의 역할을 다해주기는 힘들 것으로 보입니다.
 
-**AWS Systems Manager Session Manager (NEW)** : -아직 업데이트되지 않았습니다-
+<img src='/assets/img/2018-04-27/session-manager.png'>
+(위 캡처화면은 실제 Session Manager를 통해 shell에 접근한 모습입니다)
 
 **AWS Systems Manager Patch Manager** : Patch Manager는 보안 관련 업데이트나 AWS OS 패치와 같은 패치들을 자동화 해줍니다. 위에서 다룬 인사이트의 규정 준수에서 사용된 Patch Manager가 바로 이 AWS Systems Manager Patch Manager 입니다.
 
+하지만, Patch Manager는 생각보다 위에서 설명한 것보다 제한적으로 사용됩니다.<br>
+패치 기준과 패치가 적용될 그룹을 지정할 수 있을 뿐, 실제 적용되는 패치는 임의로 지정이 불가능하며, AWS에서 제공하는 AMI에 문제점이 발견되었거나, 보안상 문제가 있어 새로운 패치를 적용하는 용도 등으로만 사용됩니다.
+
+Patch Manager 콘솔 웹 페이지에 접속하여 실제 패치 목록들을 확인해보면 현재까지 제공되었던 패치 및 이슈 내역들을 확인하실 수 있습니다.
+
+**AWS Systems Manager Maintenance Windows** : 한국어로 번역했을 때 '유지 관리 기간'으로, Actions의 다른 기능들인 'System Manager 자동화', 'System Manager Run Command' 와 같은 단발성 작업들을 **스케줄러를 통해 주기적으로 실행시켜주는 기능**입니다.
+
+스케줄러의 일정은 cron 일정 작성법을 사용하거나 rate 일정 작성법을 사용할 수 있으며 시작과 종료날자를 지정할 수도 있습니다.
+
 <img src='/assets/img/2018-04-27/update-image.jpg'>
 
+**AWS Systems Manager State Manager** : State Manager란 관리형 인스턴스를 정의한 상태(state)로 유지하는 프로세스를 자동화합니다. 이 State Manager는 자체적으로 동작 방식이 Maintenance Windows와 유사합니다.<br>
+어떠한 작업을 주기적으로 실행시켜주고, 실행했던 작업에 대해 재사용 및 관리가 편리합니다.
 
+실제로 사용했을 때 Maintenance Windows와 큰 차이점을 느끼지 못해 AWS에 문의한 결과, Maintenance Windows와 State Manager 의 use-case에 대한 답변을 전달받았습니다.<br>
+내용 아래 공유드립니다.
 
-**AWS Systems Manager Maintenance Windows** :
+> **AWS 답변**<br><br>
+Hello Dohun,
+Thank you for reaching out to AWS Premium Support. My name is Vinayak, I have just been assigned this case and I will be assisting you with it today.<br><br>
+As I understand, you would like to know the difference between using  the SSM 'Maintenance Window' and 'State Manager' as they both do a similar task of running functions periodically with Run Command/Patch Manager. Please let me know if this needs any correction.<br><br>
+To directly answer your query, 'Maintenance Windows' will let you define a schedule for when to perform an action. Whereas, 'State Manager' automates the process of keeping your managed instances(EC2/Hybrid) in a defined state.<br><br>
+- Like you rightly mentioned, there are some tasks/use-cases of 'State Manager' that can be achieved using 'Maintenance Windows'. However, there are some use-cases that can only be achieved or achieved easily with 'State Manager':<br>
+**Example1**: For example, an association can specify that anti-virus software must be installed and running on your instances, or that certain ports must be closed. The association specifies a schedule for when the configuration is reapplied. The association also specifies actions to take when applying the configuration. For example, an association for anti-virus software might run once a day. If the software is not installed, then State Manager installs it. If the software is installed, but the service is not running, then the association might instruct State Manager to start the service.<br><br>
+- Maintenance window lets you to schedule a task during non-business hours, whereas State manager ensures that a defined state is maintained for your application environment by running SSM documents periodically.<br><br>
+>
+> I hope you find this information useful.
 
-**AWS Systems Manager State Manager** :
+즉, Maintenance Windows 만으로도 State Manager의 목적을 도달시킬 수도 있지만, State Manager를 사용함으로써 조금 더 쉽게 도달할 수 있는 use-case 들이 있습니다.<br>
+두 서비스가 사용되는 상황을 나누자면, Maintenance Windows는 업무 시간 이외의 시간에 작업을 예약할 수 있으며, State Manager는 SSM 문서(Action)을 주기적으로 실행하여 응용 프로그램 환경에 대해 정의한 상태가 유지되도록합니다.
+
+> 여기서 **SSM 문서**는 위 Run Command 에서도 사용되었으며, System Manager에 정의된 작업을 의미합니다.<br>
+'공유 리소스' 단계에서 더 상세히 알아보겠습니다.
 
 ### 공유 리소스(Shared Resource)
 
