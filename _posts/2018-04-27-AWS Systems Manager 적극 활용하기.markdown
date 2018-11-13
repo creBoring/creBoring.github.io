@@ -24,6 +24,7 @@ tags: [AWS, Systems Manager, 사용법]
 
 ## AWS Systems Manager 란?
 
+<br>
 AWS Systems Manager 란 AWS에서 여러 리소스들을 **중앙 집중화**하여 인프라 구성을 논리적으로 나누고 작업을 자동화할 수 있는 **관리형 서비스**입니다.<br>
 다른 타 AWS 서비스들에 비해 실제 EC2, RDS 내부 리소스 영역까지 관리할 수 있는 몇 안되는 서비스 중 하나입니다.
 
@@ -43,8 +44,10 @@ AWS Systems Manager는 아래의 4가지 기능을 제공합니다.
 
 각 기능들에 대해 간단히 안내드립니다.
 
+<br>
 ### 리소스 그룹(Resource Group)
 
+<br>
 리소스 그룹은 이름 그대로 AWS 리소스들을 묶어주는 서비스로 운영계, 개발계와 같이 서비스들을 **논리적**으로 구분지어 관리할 수 있습니다.
 
 <img src='/assets/img/2018-04-27/tags.png'>
@@ -54,8 +57,10 @@ AWS Systems Manager는 아래의 4가지 기능을 제공합니다.
 즉, 리소스 그룹은 **정적이지 않으며 동적으로 변경됩니다**.
 (예: 리소스 그룹에 포함되어 있던 인스턴스 하나가 삭제되면 자동으로 리소스 그룹에서도 제거되고, 새로 생성된 인스턴스가 리소스 그룹 쿼리에 적합한 경우 자동으로 리소스 그룹에 추가 됩니다.)
 
+<br>
 ### 인사이트(Insight)
 
+<br>
 인사이트는 AWS 리소스들을 대상으로 한 여러 데이터들을 한 곳에 모아 보여주는 서비스입니다. <br>
 CloudWatch와 같이 몇몇의 개별적인 AWS 서비스들 또한 인사이트 탭에서 확인할 수 있습니다.
 
@@ -73,9 +78,10 @@ CloudWatch와 같이 몇몇의 개별적인 AWS 서비스들 또한 인사이트
 
 > *관리형 인스턴스는 "**공유 리소스**" 단계에서 더 자세히 다룹니다.*
 
-
+<br>
 ### Actions
 
+<br>
 Actions 에는 실제 AWS 리소스에 직접 행 할 수 있는 작업들을 제공합니다.
 (여러 실제 리소스에 직접 작업을 진행하는 서비스들을 모아둔 탭입니다.)
 
@@ -93,13 +99,16 @@ Actions 에는 아래와 같은 작업들이 존재합니다.
 
 간략하게 하나씩 살펴보면 아래와 같습니다.
 
+<br>
 **AWS Systems Manager 자동화** : 일반적인 인스턴스나 시스템의 **유지 관리**와 **배포 작업**을 간소화하는 작업을 처리합니다. <br>
 대표적으로 EC2, RDS 인스턴스 재시작이나 AMI, Snapshot 생성 등을 처리할 수 있으며 특정 인스턴스가 아니라 위에서 다룬 '리소스 그룹'을 대상으로 여러 리소스들에 한 번에 작업을 요청할 수도 있습니다.
 
+<br>
 **AWS Systems Manager Run Command** : 인스턴스 구성을 **원격**으로 관리하게 해주는 서비스입니다.<br>
 AWS Systems Manager 자동화가 인스턴스, 시스템과 같은 인프라 수준의 작업이였다면, Run Command는 인스턴스 내부의 **Command line 수준**의 작업을 행할 수 있습니다.<br>
 실제로 Run Command를 통해 Console 화면에서 Shell Script를 실행할 수도 있으며, 윈도우 업데이트, RunDockerAction 등 다양한 작업이 가능합니다.
 
+<br>
 **AWS Systems Manager Session Manager (NEW)** : Session Manager는 최근에 업데이트 된 기능으로, EC2 인스턴스의 **Shell**에 접근할 수 있는 기능을 제공합니다.
 실제 공식문서에서 소개할 때도 **Bastion host 를 대체하는 기능**이라고 언급할 만큼 접근성이 용이하며, sudo 권한이 있어 admin 권한으로의 작업도 가능합니다.
 다만, 한가지 아쉬운 점은 Windows 서버에 접근할 때도 GUI가 아닌 Power Shell 로만 접근이 가능하기 때문에 완전히 Bastion Host의 역할을 다해주기는 힘들 것으로 보입니다.
@@ -107,6 +116,7 @@ AWS Systems Manager 자동화가 인스턴스, 시스템과 같은 인프라 수
 <img src='/assets/img/2018-04-27/session-manager.png'>
 (위 캡처화면은 실제 Session Manager를 통해 shell에 접근한 모습입니다)
 
+<br>
 **AWS Systems Manager Patch Manager** : Patch Manager는 보안 관련 업데이트나 AWS OS 패치와 같은 패치들을 자동화 해줍니다. 위에서 다룬 인사이트의 규정 준수에서 사용된 Patch Manager가 바로 이 AWS Systems Manager Patch Manager 입니다.
 
 하지만, Patch Manager는 생각보다 위에서 설명한 것보다 제한적으로 사용됩니다.<br>
@@ -114,12 +124,14 @@ AWS Systems Manager 자동화가 인스턴스, 시스템과 같은 인프라 수
 
 Patch Manager 콘솔 웹 페이지에 접속하여 실제 패치 목록들을 확인해보면 현재까지 제공되었던 패치 및 이슈 내역들을 확인하실 수 있습니다.
 
+<br>
 **AWS Systems Manager Maintenance Windows** : 한국어로 번역했을 때 '유지 관리 기간'으로, Actions의 다른 기능들인 'System Manager 자동화', 'System Manager Run Command' 와 같은 단발성 작업들을 **스케줄러를 통해 주기적으로 실행시켜주는 기능**입니다.
 
 스케줄러의 일정은 cron 일정 작성법을 사용하거나 rate 일정 작성법을 사용할 수 있으며 시작과 종료날자를 지정할 수도 있습니다.
 
 <img src='/assets/img/2018-04-27/update-image.jpg'>
 
+<br>
 **AWS Systems Manager State Manager** : State Manager란 관리형 인스턴스를 정의한 상태(state)로 유지하는 프로세스를 자동화합니다. 이 State Manager는 자체적으로 동작 방식이 Maintenance Windows와 유사합니다.<br>
 어떠한 작업을 주기적으로 실행시켜주고, 실행했던 작업에 대해 재사용 및 관리가 편리합니다.
 
@@ -143,6 +155,7 @@ To directly answer your query, 'Maintenance Windows' will let you define a sched
 > 여기서 **SSM 문서**는 위 Run Command 에서도 사용되었으며, System Manager에 정의된 작업을 의미합니다.<br>
 '공유 리소스' 단계에서 더 상세히 알아보겠습니다.
 
+<br>
 ### 공유 리소스(Shared Resource)
 
 ---
