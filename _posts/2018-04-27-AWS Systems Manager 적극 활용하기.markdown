@@ -139,8 +139,6 @@ Patch Manager 콘솔 웹 페이지에 접속하여 실제 패치 목록들을 �
 내용 아래 공유드립니다.
 
 > **AWS 답변**<br><br>
-Hello Dohun,
-Thank you for reaching out to AWS Premium Support. My name is Vinayak, I have just been assigned this case and I will be assisting you with it today.<br><br>
 As I understand, you would like to know the difference between using  the SSM 'Maintenance Window' and 'State Manager' as they both do a similar task of running functions periodically with Run Command/Patch Manager. Please let me know if this needs any correction.<br><br>
 To directly answer your query, 'Maintenance Windows' will let you define a schedule for when to perform an action. Whereas, 'State Manager' automates the process of keeping your managed instances(EC2/Hybrid) in a defined state.<br><br>
 - Like you rightly mentioned, there are some tasks/use-cases of 'State Manager' that can be achieved using 'Maintenance Windows'. However, there are some use-cases that can only be achieved or achieved easily with 'State Manager':<br>
