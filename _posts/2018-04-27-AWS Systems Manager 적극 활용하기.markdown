@@ -149,14 +149,49 @@ To directly answer your query, 'Maintenance Windows' will let you define a sched
 >
 > I hope you find this information useful.
 
-즉, Maintenance Windows 만으로도 State Manager의 목적을 도달시킬 수도 있지만, State Manager를 사용함으로써 조금 더 쉽게 도달할 수 있는 use-case 들이 있습니다.<br>
-두 서비스가 사용되는 상황을 나누자면, Maintenance Windows는 업무 시간 이외의 시간에 작업을 예약할 수 있으며, State Manager는 SSM 문서(Action)을 주기적으로 실행하여 응용 프로그램 환경에 대해 정의한 상태가 유지되도록합니다.
+즉, Maintenance Windows 만으로도 State Manager의 목적을 도달할 수 있지만, State Manager를 사용함으로써 조금 더 쉽게 도달할 수 있는 use-case 들이 있습니다.<br>
+두 서비스는 각각 아래와 같은 상황에 사용됩니다.<br>
+- **Maintenance Windows**는 업무 시간 이외의 시간에 작업을 예약할 수 있습니다.<br>
+- **State Manager**는 SSM 문서(Action)을 주기적으로 실행하여 응용 프로그램 환경에 대해 정의한 상태가 유지되도록합니다.
 
 > 여기서 **SSM 문서**는 위 Run Command 에서도 사용되었으며, System Manager에 정의된 작업을 의미합니다.<br>
 '공유 리소스' 단계에서 더 상세히 알아보겠습니다.
 
 <br>
 ### 공유 리소스(Shared Resource)
+
+<br>
+공유 리소스(Shared Resource)는 AWS Systems Manager에서 여러 동작에 필요한 자원들이나 리소스를 관리하는 서비스들입니다.
+
+공유 리소스는 아래와 같은 리소스들이 존재합니다.
+
+- AWS Systems Manager 관리형 인스턴스
+- AWS Systems Manager 정품 인증
+- AWS Systems Manager 문서(설명서)
+- AWS Systems Manager Parameter Store
+
+<br>
+**AWS Systems Manager 관리형 인스턴스** : 관리형 인스턴스는 System Manager를 위해 구성된 EC2 인스턴스를 의미합니다.<br>
+지금까지 쭉 설명해왔던 기능들은 대부분이 이 관리형 인스턴스를 대상으로 진행되는 작업들이며, System Manager를 통해 관리받고 있는 인스턴스를 의미합니다.
+
+System Manager는 SSM Agent라고 하는 Agent를 EC2 내부에 구성한 후 이를 통해 통신하는 방식으로 작동합니다.
+
+기본적으로 AWS에서 제공하는 **최신 AMI로 구성하는 인스턴스들은 기본적으로 SSM Agent가 탑재되어 있습니다.**<br>
+다만 추가적으로 **IAM 권한** 설정 및 **Outbound Internet** 설정을 끝마쳐야만 실제 System Manager를 통해 관리할 수 있습니다.
+
+해당 방법에 대해서는 'AWS Systems Manager 사용법' 에서 안내드리겠습니다.
+
+> 기본적으로 SSM Agent가 구성되어 있는 AMI 리스트는 다음 AWS 공식문서를 참고해주세요
+https://docs.aws.amazon.com/ko_kr/systems-manager/latest/userguide/systems-manager-prereqs.html
+
+<br>
+**AWS Systems Manager 정품 인증** :
+
+<br>
+**AWS Systems Manager 문서(설명서)** :
+
+<br>
+**AWS Systems Manager Parameter Store** :
 
 ---
 
@@ -186,3 +221,6 @@ https://tealium.com/what-is-tag-management/
 
 > inventory<br>
 https://www.ispsystem.com/software/dcimanager/features/extended-inventory-management
+
+> update<br>
+https://pixabay.com/photo-1672385/
