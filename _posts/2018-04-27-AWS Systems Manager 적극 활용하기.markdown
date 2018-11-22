@@ -183,13 +183,24 @@ System Manager는 SSM Agent라고 하는 Agent를 EC2 내부에 구성한 후 �
 https://docs.aws.amazon.com/ko_kr/systems-manager/latest/userguide/systems-manager-prereqs.html
 
 <br>
-**AWS Systems Manager 정품 인증** :
+**AWS Systems Manager 정품 인증** : 정품 인증은 하이브리드 환경의 서버와 VM(가상 머신)을 관리형 인스턴스로 설정하기 위한 인증 방법으로, 관리형 인스턴스 정품 인증을 생성함으로써 정품 인증 코드와 ID를 받게 됩니다.
 
 <br>
-**AWS Systems Manager 문서(설명서)** :
+**AWS Systems Manager 문서(설명서)** : AWS Systems Manager 문서는 대규모로 리소스를 관리할 수 있도록 **코드형 구성**을 지원합니다.
+<br>AWS Systems Manager 문서는 **원격**으로 인스턴스를 관리하고, 목표 상태를 유지하고, 운영을 자동화할 수 있는 일련의 동작을 정의합니다. 위에서 다루었던 Run Command, State Manager, 자동화 에서 실행하는 **동작을 정의해놓은 것이 '문서'** 이며, 각각 '명령문서', '정책문서', '자동화 문서'로 분류되어 있습니다.
+
+사용자가 임의로 문서를 만들 수도 있습니다.<br>
+문서 스키마에 맞도록 JSON이나 YAML을 작성하면 원하는 동작을 처리하는 문서를 만들 수 있습니다.
+
+<img src="/assets/img/2018-04-27/document-image.jpg" width="400px"/>
 
 <br>
-**AWS Systems Manager Parameter Store** :
+**AWS Systems Manager Parameter Store** : Parameter Store는 암호, 데이터베이스 문자열, 라이선스 코드와 같은 데이터를 안전하게 파라미터 값으로 저장할 수 있는 스토리지 서비스입니다.
+
+key value 형식으로 데이터가 저장되며, 안전하고 확장 가능한 호스팅 방식 암호 관리 서비스를 제공합니다.<br>
+이 Parameter Store를 지원하는 AWS 서비스는 Amazon EC2, Amazon Elastic Container Service, AWS Lambda, AWS CloudFormation, AWS CodeBuild 및 AWS CodeDeploy입니다.
+
+암호화, 알림, 모니터링 및 감사 기능을 위해서 AWS KMS, Amazon SNS, Amazon CloudWatch및 AWS CloudTrail과의 통합을 구성할수도 있습니다.
 
 ---
 
@@ -222,3 +233,6 @@ https://www.ispsystem.com/software/dcimanager/features/extended-inventory-manage
 
 > update<br>
 https://pixabay.com/photo-1672385/
+
+> document<br>
+https://unsplash.com/photos/h3lCgLfMXkw
