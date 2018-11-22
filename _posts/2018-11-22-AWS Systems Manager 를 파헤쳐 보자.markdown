@@ -17,9 +17,9 @@ AWS 콘솔 페이지에 접속하면 항상 상단의 '서비스' 탭 옆에 있
 
  - **[AWS Systems Manager 란?](#aws-systems-manager-란)**
 
- - **[AWS Systems Manager 의 기능들을 알아보자](#aws-systems-manager-사용법)**
+ - **[AWS Systems Manager 의 기능들을 알아보자](#aws-systems-manager-의-기능들을-알아보자)**
 
- - **[AWS Systems Manager 에 대한 개인적인 의견](#aws-systems-manager-활용하기)**
+ - **[AWS Systems Manager 에 대한 개인적인 의견](#aws-systems-manager-에-대한-개인적인-의견)**
 
 ---
 
