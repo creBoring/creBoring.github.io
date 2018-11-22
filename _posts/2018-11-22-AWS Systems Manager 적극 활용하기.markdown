@@ -1,24 +1,25 @@
 ---
 layout: post
-title: AWS Systems Manager 적극 활용하기
-date: 2018-04-27 15:00:00 +0300
+title: AWS Systems Manager 를 파헤쳐 보자
+date: 2018-11-22 15:00:00 +0300
 description: AWS Systems Manager의 구성, 사용법, 활용법에 대해 정리한 글이다. # Add post description (optional)
-img: 2018-04-27/AWS-system-manager.png # Add image post (optional)
-tags: [AWS, Systems Manager, 사용법]
+img: 2018-11-22/AWS-system-manager.png # Add image post (optional)
+tags: [AWS, AWS Systems Manager, 사용법]
 ---
 
 # AWS Systems Manager
 
-고객 리소스 관리의 효율을 높이기 위해 **AWS Systems Manager** 를 검토해 보았습니다.<br>
-하기 내용들은 작성자의 주관적인 의견으로 게시글 하단에 참조링크를 남깁니다.
+AWS 콘솔 페이지에 접속하면 항상 상단의 '서비스' 탭 옆에 있는 '리소스 그룹' 탭이 무슨 서비스인지 궁금했었는데, 들어가보니 Systems Manager 라는 서비스가 있네요.<br>
+리소스 관리 효율도 높일 수 있을 것 같고 이참에 내용을 다지고자 글로 정리해 보았습니다.<br>
+글에 대한 비판과 의견은 언제든지 환영합니다.
 
 ### 목차
 
  - **[AWS Systems Manager 란?](#aws-systems-manager-란)**
 
- - **[AWS Systems Manager 사용법](#aws-systems-manager-사용법)**
+ - **[AWS Systems Manager 의 기능들을 알아보자](#aws-systems-manager-사용법)**
 
- - **[AWS Systems Manager 활용하기](#aws-systems-manager-활용하기)**
+ - **[AWS Systems Manager 에 대한 개인적인 의견](#aws-systems-manager-활용하기)**
 
 ---
 
@@ -28,11 +29,15 @@ tags: [AWS, Systems Manager, 사용법]
 AWS Systems Manager 란 AWS에서 여러 리소스들을 **중앙 집중화**하여 인프라 구성을 논리적으로 나누고 작업을 자동화할 수 있는 **관리형 서비스**입니다.<br>
 다른 타 AWS 서비스들에 비해 실제 EC2, RDS 내부 리소스 영역까지 관리할 수 있는 몇 안되는 서비스 중 하나입니다.
 
-<img src='/assets/img/2018-04-27/AWS-system-manager-icon.png'>
+<img src='/assets/img/2018-11-22/AWS-system-manager-icon.png'>
 
 이전에는 Amazon EC2 Systems Manager 라는 이름으로 EC2 에서만 사용할 수 있던 서비스였지만, <br>
 현재는 EC2 뿐만아니라 RDS, CloudFormation, 등.. 더 넓은 범위의 리소스 관리가 가능해졌습니다.<br>
 (하지만 역시 EC2 리소스 관리 측면이 더 많이 존재합니다)
+
+기본적으로 SSM Agent 라고 하는 Agent와 통신하는 방식으로 동작하는데, 직접 리소스에 접근하지 않고도 여러가지 작업들을 예약하고 처리할 수 있어서, 보안에 민감하거나 콘솔에서 작업들을 관리하고 history를 쌓고 싶으시면 추천드리는 서비스입니다.
+
+> 아직 EC2 콘솔 페이지에서도 EC2 Systems Manager 라는 이름으로 옛날 UI가 제공되고 있습니다.
 
  ※*AWS Systems Manager는 리전별로 격리된 서비스입니다.*
 
@@ -44,13 +49,19 @@ AWS Systems Manager는 아래의 4가지 기능을 제공합니다.
 
 각 기능들에 대해 간단히 안내드립니다.
 
+---
+
+## AWS Systems Manager 의 기능들을 알아보자
+
+
+
 <br>
 ### 리소스 그룹(Resource Group)
 
 <br>
 리소스 그룹은 이름 그대로 AWS 리소스들을 묶어주는 서비스로 운영계, 개발계와 같이 서비스들을 **논리적**으로 구분지어 관리할 수 있습니다.
 
-<img src='/assets/img/2018-04-27/tags.png'>
+<img src='/assets/img/2018-11-22/tags.png'>
 
 실제로 리소스 그룹은 **리소스 유형**과 **태그 값**을 이용한 **쿼리문**으로 생성되는 집합으로,<br>
 직접 리소스들을 추가하는 것이 아닌, 위에서 설정한 쿼리문에 부합한 리소스들이 그룹에 추가됩니다. 이 리소스들을 대상으로 여러가지 작업을 진행할 수 있습니다.<br>
@@ -68,7 +79,7 @@ CloudWatch와 같이 몇몇의 개별적인 AWS 서비스들 또한 인사이트
 
 **인벤토리**의 경우 더 정확하게 말하면 **인벤토리 수집** 기능으로, 인벤토리란 수집할 메타데이터들의 틀, 구성이라고 생각하면 됩니다.
 
-<img src='/assets/img/2018-04-27/inventory.png'>
+<img src='/assets/img/2018-11-22/inventory.png'>
 
 예를들면 네트워크 구성(IP, MacAddr, DNS, ...), Windows 업데이트(설치한 사람, 설치 날짜, ...), 애플리케이션(애플리케이션 이름, 버전, ...) 등과 같은 메타데이터 정보를 전달받을 인벤토리를 구성하고 구성에 맞는 데이터를 수집합니다.
 
@@ -113,7 +124,7 @@ AWS Systems Manager 자동화가 인스턴스, 시스템과 같은 인프라 수
 실제 공식문서에서 소개할 때도 **Bastion host 를 대체하는 기능**이라고 언급할 만큼 접근성이 용이하며, sudo 권한이 있어 admin 권한으로의 작업도 가능합니다.
 다만, 한가지 아쉬운 점은 Windows 서버에 접근할 때도 GUI가 아닌 Power Shell 로만 접근이 가능하기 때문에 완전히 Bastion Host의 역할을 다해주기는 힘들 것으로 보입니다.
 
-<img src='/assets/img/2018-04-27/session-manager.png'>
+<img src='/assets/img/2018-11-22/session-manager.png'>
 (위 캡처화면은 실제 Session Manager를 통해 shell에 접근한 모습입니다)
 
 <br>
@@ -129,7 +140,7 @@ Patch Manager 콘솔 웹 페이지에 접속하여 실제 패치 목록들을 �
 
 스케줄러의 일정은 cron 일정 작성법을 사용하거나 rate 일정 작성법을 사용할 수 있으며 시작과 종료날자를 지정할 수도 있습니다.
 
-<img src='/assets/img/2018-04-27/update-image.jpg'>
+<img src='/assets/img/2018-11-22/update-image.jpg'>
 
 <br>
 **AWS Systems Manager State Manager** : State Manager란 관리형 인스턴스를 정의한 상태(state)로 유지하는 프로세스를 자동화합니다. 이 State Manager는 자체적으로 동작 방식이 Maintenance Windows와 유사합니다.<br>
@@ -192,7 +203,7 @@ https://docs.aws.amazon.com/ko_kr/systems-manager/latest/userguide/systems-manag
 사용자가 임의로 문서를 만들 수도 있습니다.<br>
 문서 스키마에 맞도록 JSON이나 YAML을 작성하면 원하는 동작을 처리하는 문서를 만들 수 있습니다.
 
-<img src="/assets/img/2018-04-27/document-image.jpg" width="400px"/>
+<img src="/assets/img/2018-11-22/document-image.jpg" width="400px"/>
 
 <br>
 **AWS Systems Manager Parameter Store** : Parameter Store는 암호, 데이터베이스 문자열, 라이선스 코드와 같은 데이터를 안전하게 파라미터 값으로 저장할 수 있는 스토리지 서비스입니다.
@@ -204,14 +215,17 @@ key value 형식으로 데이터가 저장되며, 안전하고 확장 가능한 
 
 ---
 
-## AWS Systems Manager 사용법
+## AWS Systems Manager 에 대한 개인적인 의견
 
+<br>
+Systems Manager는 이것저것 원격으로 많이 시도해보고 작업할 수 있는 서비스입니다.<br>
+처음에는 정해진 템플릿으로 작업할 일이 있을 때만 사용될 수 있겠다. 라는 생각을 가졌었지만,실제 다루는 영역을 보니 세션에 접근해 su 권한까지 접근할 수 있을 정도로 접근 영역이 넓습니다.
 
----
+Systems Manager는 기능들도 매우 많고 다른 서비스들과 연계될 일이 없어서 생소하게 느껴질 수 있지만, 각 요소들을 이해하고 짜맞출 수만 있다면 인프라 구성을 마치 컨테이너 벨트처럼 유연하게 다룰 수 있을 것 같습니다.<br>
+(세션 매니저는 Window GUI 환경만 구성되었으면 정말 Bastion Host 서버를 둘 필요가 없어졌을텐데.. 아쉬운 느낌이 조금 있습니다.)
 
-
-## AWS Systems Manager 활용하기
-
+특히나 스케줄러를 통해 인프라의 구성을 변동시킬 수 있기 때문에, 관리자의 입장에서 매우 편리한 서비스인 것 같습니다.<br>
+새벽에 EC2 인스턴스를 재시작할 일이 있거나, 주기적으로 진행되어야 하는 인프라 구성이 있다면 Systems Manager 검토를 추천드립니다.<br>
 
 ---
 
