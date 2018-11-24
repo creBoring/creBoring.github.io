@@ -6,6 +6,14 @@
  * 2. Prevent adjustments of font size after orientation changes in
  *    IE on Windows Phone and in iOS.
  */
+
+/*
+*
+*   배민 한나체 google early access
+*
+*/
+@import url(//fonts.googleapis.com/earlyaccess/hanna.css);
+
 html {
   line-height: 1.15;
   /* 1 */
@@ -957,7 +965,7 @@ table tfoot td {
 
 .about .author-name {
   /*font-family: 'PT Serif', serif;*/
-  font-family: 'FontWoowahan';
+  font-family: 'Hanna', sans-serif;
   margin: 0 0 10px;
   position: relative;
   padding-bottom: 15px;
@@ -1152,7 +1160,7 @@ footer .copyright {
 
 .post .post-content .post-title a {
   /*font-family: 'PT Serif', serif;*/
-  font-family: 'FontWoowahan';
+  font-family: 'Hanna', sans-serif;
   text-decoration: none;
   color: #263959;
 }
