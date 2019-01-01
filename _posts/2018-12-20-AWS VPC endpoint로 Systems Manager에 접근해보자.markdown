@@ -15,9 +15,9 @@ AWS Systems Manager를 정리하며, **Outbound** 인터넷이 되어야만 SSM 
 
 - **[Systems Manager](#systems-manager)**
 
-- **[VPC 엔드포인트](#vpc-endpoint)**
+- **[VPC 엔드포인트](#vpc-엔드포인트)**
 
-- **[Systems Manager에 대한 VPC 엔드포인트 설정](#systems-manager-에-대한-vpc-엔드포인트-설정)**
+- **[Systems Manager에 대한 VPC 엔드포인트 설정](#systems-manager에-대한-vpc-엔드포인트-설정)**
 
 - **[테스트](#테스트)**
 
@@ -36,9 +36,33 @@ AWS Systems Manager를 정리하며, **Outbound** 인터넷이 되어야만 SSM 
 
 ---
 
-## VPC endpoint
+## VPC 엔드포인트
 
 <br>
+우선 **VPC 엔드포인트**란, AWS에서 제공하는 서비스들 중 VPC에 속해있지 않는, 인터넷을 통해서만 통신이 가능한 서비스들을 VPC 내부에 endpoint를 생성하여 **사설망으로 접근할 수 있도록 하는 서비스** 입니다.<br>
+AWS에는 VPC 내부에 생성되는 리소스가 있는가 하면, VPC와는 상관없이 Regional 하게 서비스되는 리소스들도 존재합니다. ex) S3, dynamodb, Systems Manager, ...
+
+VPC endpoint는 두 가지 방식이 존재합니다.<br>
+첫 번째는 **인터페이스 VPC 엔드포인트**이며, 두 번째는 **게이트웨이 VPC 엔드포인트** 입니다.
+
+두 방식은 각각 다른 작동원리를 가지고 있으며, AWS 서비스별로 지원하는 엔드포인트 방식도 다릅니다.<br>
+- 인터페이스 VPC 엔드포인트 : Systems Manager, KMS, SNS, ...
+- 게이트웨이 VPC 엔드포인트 : S3, dynamodb
+
+<img src="https://docs.aws.amazon.com/ko_kr/vpc/latest/userguide/images/vpc-endpoint-s3-diagram.png">
+
+VPC endpoint 두 가지 방식의 작동원리를 간단하게 살펴보면 다음과 같습니다.<br>
+
+#### 인터페이스 VPC 엔드포인트
+
+인터페이스 VPC 엔드포인트는 AWS 리소스의 엔드포인트를 ENI(Elastic Network Interface) 즉 Network Interface로써 private IP를 지정하여 사용하는 방식입니다.<br>
+인터페이스 VPC 엔드포인트 방식을 사용하면 실제로 해당 리소스에 대한 privaet IP가 VPC의 Subnet 내부에 생성됩니다.<br>
+사용자는 해당 private IP를 통해 해당 리소스에 접근할 수 있게 됩니다.
+
+<br>
+#### 게이트웨이 VPC 엔드포인트
+
+
 
 ---
 
