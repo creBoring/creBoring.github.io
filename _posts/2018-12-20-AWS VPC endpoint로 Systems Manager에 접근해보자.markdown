@@ -121,6 +121,10 @@ https://docs.aws.amazon.com/ko_kr/systems-manager/latest/userguide/sysman-settin
   - 서비스 이름 = 위에 언급한 4가지 서비스명을 하나씩 각각 선택하여 만들어줍니다.
   - VPC & 서브넷 = 앞에서 만들었던 서브넷과 서브넷이 속해있는 VPC를 선택해줍니다.<br>
   *(서브넷은 VPC 내부에 어떤 서브넷을 선택해도 상관없습니다.)*
+  - 보안그룹 = VPC 엔드포인트에 연결될 보안그룹에는 프라이빗 서브넷에서 443 포트로 들어오는 연결을 허용해야 합니다.
+
+> VPC Endpoint에 연결될 보안그룹 지정 시 주의사항은 아래 공식문서의 **'수신 연결'** 을 확인해주세요<br>
+https://docs.aws.amazon.com/ko_kr/systems-manager/latest/userguide/sysman-setting-up-vpc.html#vpc-requirements-and-limitations
 
 <img src="/assets/img/2018-12-21/system-manager-endpoint.png"/>
 
