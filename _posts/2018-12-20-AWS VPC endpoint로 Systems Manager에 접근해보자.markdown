@@ -25,9 +25,9 @@ AWS Systems Manager를 정리하며, **Outbound** 인터넷이 되어야만 SSM 
 
 ---
 
+<br>
 ## Systems Manager
 
-<br>
 우선은 현 게시글은 AWS Systems Manager가 어떤 기능인지 안다는 전제하에 작성되었기 때문에,<br>
 현 게시글을 다루기 전에 Systems Manager가 어떤 서비스인지 모르는 분들은 다음 게시글을 먼저 읽고 오시는 것을 권해드립니다.
 
@@ -36,9 +36,9 @@ AWS Systems Manager를 정리하며, **Outbound** 인터넷이 되어야만 SSM 
 
 ---
 
+<br>
 ## VPC 엔드포인트
 
-<br>
 우선 **VPC 엔드포인트**란, AWS에서 제공하는 서비스들 중 VPC에 속해있지 않는, 인터넷을 통해서만 통신이 가능한 서비스들을 VPC 내부에 endpoint를 생성하여 **사설망으로 접근할 수 있도록 하는 서비스** 입니다.<br>
 AWS에는 VPC 내부에 생성되는 리소스가 있는가 하면, VPC와는 상관없이 Regional 하게 서비스되는 리소스들도 존재합니다. ex) S3, dynamodb, Systems Manager, ...
 
@@ -73,14 +73,14 @@ https://docs.aws.amazon.com/ko_kr/vpc/latest/userguide/vpc-endpoints.html
 
 ---
 
+<br>
 ## Systems Manager에 대한 VPC 엔드포인트 설정
 
-<br>
 본격적으로 인터넷에 연결되지 않은 VPC Subnet을 구성하고 EC2를 생성한 후에 VPC Endpoint를 이용해 리소스들을 관리해보겠습니다.
 
+<br>
 ### VPC Private(인터넷에 연결 되지 않은) Subnet 생성
 
-<br>
 System Manager를 사용하기 위해서는 반드시 EC2 인스턴스의 Outbound 통신이 이루어져야 합니다.<br>
 VPC 엔드포인트를 사용하면 이러한 제약조건을 신경쓰지 않아도 됩니다.<br>
 VPC 엔드포인트를 생성하여 인터넷이 되지 않는 서브넷에 존재한 인스턴스를 System Manager로 관리해보겠습니다.
@@ -97,10 +97,9 @@ VPC 엔드포인트를 생성하여 인터넷이 되지 않는 서브넷에 존�
  7. 생성된 서브넷을 선택한 후 아래 상세 정보가 표시되면, 상세 정보에서 **라우팅 테이블 탭**을 선택합니다.
  8. **[라우팅 테이블 수정]** 버튼을 누른 후, 라우팅테이블을 방금 만든 라우팅테이블로 바꿔줍니다.
 
-
+<br>
 ### System Manager VPC 엔드포인트 생성
 
-<br>
 이제 실제로 VPC에 연결시킬 VPC 엔드포인트를 생성해 보겠습니다.<br>
 System Manager를 Private한 환경에서 사용하기 위해서는 3~4가지 엔드포인트를 생성해야합니다.<br>
 기본적으로는 아래 세가지 VPC 엔드포인트가 필요하며, System Manager의 Session Manager 기능을 사용하시려는 경우 한 가지 엔드포인트가 추가로 필요합니다.<br>
@@ -131,9 +130,9 @@ https://docs.aws.amazon.com/ko_kr/systems-manager/latest/userguide/sysman-settin
 엔드포인트를 모두 만들 경우 각각의 엔드포인트는 네트워크 인터페이스를 할당받게 됩니다.<br>
 엔드포인트들의 상태가 모두 ***'사용 가능'*** 이 되면 다음 스텝으로 넘어갑니다.
 
+<br>
 ### SSM 관리형 인스턴스 생성
 
-<br>
 이제 인터넷에 연결되지 않은 공간에서 System Manager를 사용할 환경이 모두 갖춰졌습니다.<br>
 System Manager로 관리할 EC2 인스턴스를 생성해줍시다.
 
@@ -150,32 +149,76 @@ System Manager로 관리할 EC2 인스턴스를 생성해줍시다.
 
 ---
 
+<br>
 ## 테스트
 
-<br>
 VPC Endpoint를 이용해 private 환경에서 System Manager로 EC2 인스턴스에 여러 작업을 걸어보겠습니다.
 
-### Session Manager
+<br>
+### 테스트 환경
+
+**< System Manager 관리형 인스턴스가 구성되어 있습니다. >**
+<img src='/assets/img/2018-12-21/test-state1.png' />
+
+**< 인터넷에 연결되지 않은 서브넷에 VPC Endpoint가 구성되어 있습니다. >**
+<img src='/assets/img/2018-12-21/test-state2.png' />
 
 <br>
+### Session Manager
 
+Session Manager 연결 시도 시 별다른 이상없이 접근이 가능했습니다.<br>
+정상적으로 서버에 ssm-user 로 접근했으며 내부에서 명령어도 잘 작동합니다 :)
 
+<img src='/assets/img/2018-12-21/session-manager-test.png' />
+
+<br>
 ### Run Command
 
+Run Command 를 통해 ***AWS-RunShellScript Document*** 를 실행시켜 보았습니다.<br>
+파라미터로는 "ls -al" 을 주었으며 결과값이 정상적으로 출력됩니다.
+
+<img src='/assets/img/2018-12-21/run-command-test.png' />
+
+<br>
 ### Maintenance Windows
+
+Maintenance Windows(유지 관리 기간) 또한 잘 작동합니다.<br>
+**'자동화'**를 Maintenance Windows로 작동시켰으며 이 때 실행한 Document는 ***AWS-StopEC2Instance*** 입니다.
+
+<img src='/assets/img/2018-12-21/maintenance-windows-test.png' />
 
 ---
 
+<br>
 ## 제약 조건
 
-<br>
+System Manager를 Private 환경에서 VPC endpoint를 통해 사용하려면, 아무래도 public하게 인터넷으로 사용하는 것보단 제약조건이 존재합니다.<br>
+
+- aws:domainJoin 플러그인을 사용하는 SSM 문서에서 도메인으로 Windows 인스턴스를 조인하도록 요구하는 요청이 실패합니다.
+- VPC 엔드포인트는 현재 교차 리전 요청을 지원하지 않습니다.
+- VPC Endpoint에 연결된 보안 그룹은 관리형 인스턴스의 프라이빗 서브넷에서 443 포트로 들어오는 연결을 허용해야 합니다.<br>
+*(System Manager 통신이 443 포트로 이루어지기 때문입니다)*
+- VPC 엔드포인트 정책이 Amazon S3 버킷에 대한 몇몇 액세스를 허용해야 합니다
+
+더 자세한 내용은 아래 공식문서를 참고하시기 바랍니다.
+
+> VPC Endpoint로 System Manager 사용 시 제약 조건<br>
+https://docs.aws.amazon.com/ko_kr/systems-manager/latest/userguide/sysman-setting-up-vpc.html#vpc-requirements-and-limitations
 
 ---
 
 ### 참고 문헌
 
+> AWS System Manager Docs<br>
+https://docs.aws.amazon.com/ko_kr/systems-manager/latest/userguide/what-is-systems-manager.html
+
+> AWS VPC Endpoint Docs<br>
+https://docs.aws.amazon.com/ko_kr/vpc/latest/userguide/vpc-endpoints.html
 
 ### 이미지 참고
 
 > AWS icon<br>
 https://aws.amazon.com/ko/architecture/icons/
+
+> VPC Endpoint 아키텍처 그림<br>
+https://docs.aws.amazon.com/ko_kr/vpc/latest/userguide/vpce-gateway.html
